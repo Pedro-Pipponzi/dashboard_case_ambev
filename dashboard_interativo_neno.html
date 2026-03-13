@@ -1,0 +1,522 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Long Neck NENO — Cenários</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root{--a1:#0D2B55;--a2:#1B3A6B;--a3:#2D5282;--a4:#4A7FB5;--a5:#6A9FCC;--a6:#8FBCDE;--a7:#B3D4ED;--a8:#D6EAFA;--bg:#F0F4F8;--w:#fff;--g4:#D4D4D4;--g2:#6B6B6B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#2C2C2C;font-size:13px}
+.bar{background:var(--a2);padding:11px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--a4);position:sticky;top:0;z-index:100}
+.logo{width:32px;height:32px;background:var(--a4);border-radius:6px;font-weight:700;font-size:11px;color:#fff;display:flex;align-items:center;justify-content:center}
+.brand{margin-left:10px}.bt{font-weight:700;font-size:14px;color:#fff}.bs{font-size:10px;color:var(--a7);margin-top:1px}
+.bl{display:flex;align-items:center}.chip{background:var(--a3);border-radius:20px;padding:3px 12px;font-size:10px;font-weight:600;color:var(--a7)}
+.painel{background:var(--a2);padding:14px 28px 16px;border-bottom:3px solid var(--a4)}
+.panel-top{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.panel-bot{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12);display:flex;gap:10px}
+.pt{font-size:9px;font-weight:700;color:var(--a6);letter-spacing:.9px;text-transform:uppercase;margin-bottom:7px}
+.cen-row{display:flex;gap:8px}
+.cbtn{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.25);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;color:rgba(255,255,255,.65);cursor:pointer;transition:all .18s;min-width:148px;text-align:center}
+.cbtn:hover{background:rgba(255,255,255,.18);color:#fff}
+.cbtn.on{background:rgba(255,255,255,.22);border-color:#fff;color:#fff}
+.cbtn .csub{font-size:9px;font-weight:400;color:rgba(255,255,255,.45);margin-top:2px;line-height:1.4}
+.cbtn.on .csub{color:rgba(255,255,255,.7)}
+.ctrl-box{background:rgba(255,255,255,.07);border-radius:8px;padding:10px 13px;min-width:185px;flex:1;max-width:255px}
+.cl{font-size:9px;font-weight:700;color:var(--a6);letter-spacing:.7px;text-transform:uppercase;margin-bottom:3px}
+.cv{font-size:17px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px}
+.cs{font-size:9px;color:var(--a7);margin-bottom:6px;min-height:13px}
+input[type=range]{width:100%;height:4px;border-radius:2px;outline:none;border:none;-webkit-appearance:none;background:rgba(255,255,255,.25);cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.range-labels{display:flex;justify-content:space-between;font-size:8px;color:var(--a7);margin-top:3px}
+.modal-box{background:rgba(255,255,255,.07);border-radius:8px;padding:10px 13px;min-width:155px}
+.tbtn-row{display:flex;gap:5px;margin-bottom:6px}
+.tbtn{flex:1;padding:5px 0;border-radius:5px;border:1.5px solid rgba(255,255,255,.3);font-size:10px;font-weight:700;color:rgba(255,255,255,.5);background:transparent;cursor:pointer;transition:all .15s;text-align:center}
+.tbtn.on{background:#fff;color:var(--a2);border-color:#fff}
+.tbtn:hover:not(.on){background:rgba(255,255,255,.12);color:#fff}
+.modal-info{font-size:9px;color:var(--a7);line-height:1.5}
+.modal-info b{color:#fff;font-weight:700}
+.reset-btn{background:transparent;border:1.5px solid rgba(255,255,255,.28);border-radius:6px;padding:5px 12px;font-size:10px;font-weight:700;color:rgba(255,255,255,.65);cursor:pointer;white-space:nowrap}
+.reset-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+main{padding:18px 28px 70px;display:flex;flex-direction:column;gap:22px}
+h2{font-size:14px;font-weight:700;color:var(--a2);border-bottom:2px solid var(--a6);padding-bottom:7px;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.kpi{background:var(--w);border-radius:8px;padding:11px 13px;border-left:4px solid var(--a4);transition:all .3s}
+.kpi.k-alerta{border-left-color:#C0392B;background:#FEF0EF}.kpi.k-ok{border-left-color:var(--a5)}
+.kl{font-size:9px;font-weight:700;color:var(--g2);letter-spacing:.7px;text-transform:uppercase;margin-bottom:3px}
+.kv{font-size:19px;font-weight:700;line-height:1;color:var(--a2);transition:color .3s}
+.kv.k-alerta{color:#C0392B}.kv.k-ok{color:var(--a4)}.ks{font-size:10px;color:var(--g2);margin-top:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.card{background:var(--w);border-radius:8px;padding:13px 15px}
+.ct{font-size:10px;font-weight:700;color:var(--a3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px;background:var(--a8);color:var(--a2);white-space:nowrap}
+.badge.b-warn{background:#FFF3CD;color:#856404}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.tbl th{padding:5px 8px;font-size:9px;font-weight:700;letter-spacing:.7px;color:var(--g2);text-transform:uppercase;border-bottom:2px solid var(--g4);background:var(--bg);text-align:left}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--bg);transition:all .25s}
+.num{text-align:right;font-weight:600}.hl{color:var(--a2);font-weight:600}
+.d-ok{color:var(--a3);font-weight:700}.d-warn{color:#B36200;font-weight:700}.d-crit{color:#C0392B;font-weight:700}
+.als{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.al{border-radius:5px;padding:7px 10px;font-size:11px;display:flex;gap:7px;align-items:flex-start;border:1px solid transparent}
+.al.crit{background:#FEF0EF;border-color:#F5B7B1;color:#922B21}
+.al.warn{background:#FFF9E6;border-color:#FFD966;color:#7A4F00}
+.al.ok{background:#F5FAF7;border-color:#A9DFBF;color:#1B5E20}
+.al-i{flex-shrink:0;font-weight:700}
+.sku-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.stab{padding:4px 12px;border-radius:16px;font-size:10px;font-weight:700;border:1.5px solid var(--g4);cursor:pointer;color:var(--g2);background:var(--bg);transition:all .15s}
+.stab.on{background:var(--a2);color:#fff;border-color:var(--a2)}
+</style></head><body>
+
+<div class="bar">
+  <div class="bl">
+    <div class="logo">LN</div>
+    <div class="brand">
+      <div class="bt">Long Neck NENO &mdash; An&aacute;lise de Cen&aacute;rios</div>
+      <div class="bs">Fevereiro 2026 &middot; Case Ambev / Insper &middot; Fonte: WSNP Analise_LongNeck</div>
+    </div>
+  </div>
+  <div class="chip">DATA-BASE 02/02/2026</div>
+</div>
+
+<div class="painel">
+  <div class="panel-top">
+    <div>
+      <div class="pt">Cen&aacute;rio base</div>
+      <div class="cen-row">
+        <button class="cbtn on" id="cBase" onclick="loadCen('base')">
+          Cen&aacute;rio Divulgado
+          <div class="csub">Goose 0 HL · sem Malzbier<br>DOI da planilha</div>
+        </button>
+        <button class="cbtn" id="cSol" onclick="loadCen('sol')">
+          Solu&ccedil;&atilde;o
+          <div class="csub">Goose 15.821 + Malz 15.897 HL<br>rodo · DOI do print</div>
+        </button>
+      </div>
+    </div>
+    <div class="ctrl-box">
+      <div class="cl">Transfer. Goose Island</div>
+      <div class="cv" id="vGoose">0 HL</div>
+      <div class="cs" id="csGoose">&nbsp;</div>
+      <input type="range" id="sGoose" min="0" max="70000" step="500" value="0">
+      <div class="range-labels"><span>0</span><span>35.000</span><span>70.000 HL</span></div>
+    </div>
+    <div class="ctrl-box">
+      <div class="cl">Transfer. Malzbier</div>
+      <div class="cv" id="vMalz">0 HL</div>
+      <div class="cs" id="csMalz">&nbsp;</div>
+      <input type="range" id="sMalz" min="0" max="30000" step="500" value="0">
+      <div class="range-labels"><span>0</span><span>15.000</span><span>30.000 HL</span></div>
+    </div>
+    <div class="modal-box">
+      <div class="cl">Modal</div>
+      <div class="tbtn-row">
+        <button class="tbtn on" id="btnCabo" onclick="setModal('cabo')">CABO · 25d</button>
+        <button class="tbtn"    id="btnRodo" onclick="setModal('rodo')">RODO · 6d</button>
+      </div>
+      <div class="modal-info" id="modalInfo">
+        <b>Cabotagem:</b> lead 25d &rarr; chega s&oacute; em W3<br>
+        W0&ndash;W2: sem refor&ccedil;o de estoque
+      </div>
+    </div>
+  </div>
+  <div class="panel-bot">
+    <button class="reset-btn" onclick="loadCen('base')">&#x21BA; Cen&aacute;rio Divulgado</button>
+    <button class="reset-btn" onclick="loadCen('sol')">&#9651; Solu&ccedil;&atilde;o</button>
+  </div>
+</div>
+
+<main>
+
+<div class="kpis">
+  <div class="kpi" id="kGoose"><div class="kl">Transfer. Goose</div><div class="kv" id="kvGoose">0 HL</div><div class="ks" id="ksGoose">sem transf.</div></div>
+  <div class="kpi" id="kMalz"><div class="kl">Transfer. Malzbier</div><div class="kv" id="kvMalz">0 HL</div><div class="ks" id="ksMalz">sem transf.</div></div>
+  <div class="kpi" id="kCusto"><div class="kl">Custo total frete</div><div class="kv" id="kvCusto">R$ 0</div><div class="ks" id="ksCusto">—</div></div>
+  <div class="kpi" id="kMaco"><div class="kl">MACO líq. Goose</div><div class="kv" id="kvMaco">R$ 350/HL</div><div class="ks" id="ksMaco">produção local</div></div>
+  <div class="kpi" id="kRuptura"><div class="kl">SKUs abaixo 12d</div><div class="kv" id="kvRuptura">—</div><div class="ks" id="ksRuptura">—</div></div>
+</div>
+
+<div>
+  <h2>&#x1F4C8; DOI (Suf. f) por SKU</h2>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Sufici&ecirc;ncia final por semana <span class="badge" id="bdgModal">CABO · lead 25d</span></div>
+      <div style="position:relative;height:270px"><canvas id="cDOI"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Tabela DOI <span class="badge" id="bdgCen">Cen&aacute;rio Divulgado</span></div>
+      <table class="tbl">
+        <thead><tr><th>SKU</th><th class="num">W0</th><th class="num">W1</th><th class="num">W2</th><th class="num">W3</th></tr></thead>
+        <tbody id="tDOI"></tbody>
+      </table>
+      <div id="alsBox" class="als"></div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h2>&#x1F4B0; Custo de Frete &amp; MACO L&iacute;quido</h2>
+  <div class="g3">
+    <div class="card">
+      <div class="ct">Custo unit&aacute;rio <span class="badge" id="bdgFrete">cabo</span></div>
+      <div style="position:relative;height:210px"><canvas id="cFrete"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">MACO l&iacute;quido <span class="badge">R$/HL</span></div>
+      <div style="position:relative;height:210px"><canvas id="cMaco"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Transfer. Goose por semana <span class="badge" id="bdgVolM">—</span></div>
+      <div style="position:relative;height:210px"><canvas id="cVol"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h2>&#x1F3ED; Programa&ccedil;&atilde;o de Produ&ccedil;&atilde;o</h2>
+  <div class="g3">
+    <div class="card"><div class="ct">PCP NS541 — Pernambuco <span class="badge">cap. 27.000 HL/sem</span></div><div style="position:relative;height:220px"><canvas id="cNS"></canvas></div></div>
+    <div class="card"><div class="ct">Ocupa&ccedil;&atilde;o das linhas (%)</div><div style="position:relative;height:220px"><canvas id="cOcup"></canvas></div></div>
+    <div class="card"><div class="ct">PCP AQ541 — Aquiraz <span class="badge">cap. 12.600 HL/sem</span></div><div style="position:relative;height:220px"><canvas id="cAQ"></canvas></div></div>
+  </div>
+</div>
+
+<div>
+  <h2>&#x1F4E6; Demanda por GEO</h2>
+  <div class="sku-tabs" id="skuTabs">
+    <button class="stab on" data-sku="total">Todas as LNs</button>
+    <button class="stab" data-sku="malz">Malzbier</button>
+    <button class="stab" data-sku="goose">Goose Island</button>
+    <button class="stab" data-sku="color">Colorado</button>
+    <button class="stab" data-sku="pat">Patagônia</button>
+  </div>
+  <div class="card">
+    <div class="ct">Demanda por GEO (HL) <span class="badge" id="bdgDem">Todas as LNs</span> <span class="badge" id="bdgDemCen">Cen&aacute;rio Divulgado</span></div>
+    <div style="position:relative;height:280px"><canvas id="cDem"></canvas></div>
+  </div>
+</div>
+
+</main>
+<script>
+
+const B = {"div_doi_goose": [8.8, 11.1, 4.5, 11.4], "div_doi_malz": [7.1, 8.4, 15.5, 9.5], "doi_color": [18.5, 16.5, 20.5, 14.1], "doi_pat": [13.1, 10.8, 8.4, 11.7], "goose_doi_0hl": [13.3, 16.9, 15.1, 22.7], "goose_slope": [-8.5e-05, -0.000108, -0.000198, -0.000211], "malz_doi_0hl": [4.2, 2.7, 7.4, 1.4], "malz_slope": [0.000491, 0.001069, 0.000988, 0.000988], "malz_anc_vol": 15897, "malz_anc_doi": [12.0, 19.7, 23.1, 17.1], "sol_vol_goose": 15821, "sol_vol_malz": 15897, "div_vol_goose": 53688, "div_tc_goose": [15326, 12830, 12762, 12770], "cabo_goose_ba": 82.4, "cabo_goose_pb": 88.3, "cabo_malz_ba": 84.6, "cabo_malz_pb": 95.3, "maco_malz": 285, "maco_goose": 350, "maco_color": 300, "doi_min": 12, "prop_ba": 0.24, "pcp_aq_malz": [0, 9000, 7560, 0], "pcp_aq_pat": [12240, 1800, 5040, 12600], "pcp_aq_color": [0, 0, 0, 0], "pcp_ns_goose": [5400, 14400, 0, 12600], "pcp_ns_malz": [16200, 0, 12960, 0], "pcp_ns_color": [5400, 0, 10800, 0], "pcp_ns_outros": [0, 5400, 3240, 14400], "ocup_aq": [97.1, 85.7, 100.0, 100.0], "ocup_ns": [100.0, 73.3, 100.0, 100.0], "dem_malz_div": {"Mapapi": [4673, 4836, 3275, 4004], "NE Norte": [1517, 1743, 1314, 1418], "NE Sul": [2485, 2706, 1992, 2198], "NO Centro": [1713, 1895, 1377, 1558]}, "dem_malz_sol": {"Mapapi": [6075, 6286, 4258, 5205], "NE Norte": [1972, 2266, 1708, 1844], "NE Sul": [3230, 3518, 2589, 2857], "NO Centro": [2228, 2463, 1790, 2026]}, "dem_goose": {"Mapapi": [4733, 5341, 3839, 4353], "NE Norte": [3887, 3836, 2990, 3301], "NE Sul": [3197, 3140, 2386, 2682], "NO Centro": [2868, 2969, 2348, 2568]}, "dem_color": {"Mapapi": [1854, 1951, 1425, 1644], "NE Norte": [1371, 1620, 1268, 1397], "NE Sul": [1200, 1384, 1052, 1144], "NO Centro": [1579, 1701, 1222, 1391]}, "dem_pat": {"Mapapi": [2293, 2914, 2162, 2332], "NE Norte": [2675, 2494, 1822, 2007], "NE Sul": [2066, 2160, 1564, 1730], "NO Centro": [1271, 1543, 1162, 1291]}};
+const A1='#0D2B55',A2='#1B3A6B',A3='#2D5282',A4='#4A7FB5',A5='#6A9FCC',A6='#8FBCDE',A7='#B3D4ED',REF='#9CA3AF';
+Chart.defaults.font.size=11; Chart.defaults.font.family="'Inter',sans-serif"; Chart.defaults.color='#6B6B6B';
+const TT={backgroundColor:'#fff',borderColor:'#D4D4D4',borderWidth:1,titleColor:A2,bodyColor:'#2C2C2C',padding:9};
+const GR=()=>({color:'rgba(0,0,0,.06)'});
+const fmt=n=>new Intl.NumberFormat('pt-BR').format(Math.round(n));
+const fmtM=n=>'R$ '+(n/1e6).toFixed(2).replace('.',',')+' M';
+const sems=['W0 02/fev','W1 09/fev','W2 16/fev','W3 23/fev'];
+
+let cenAtivo='base', modalAtivo='cabo', skuAtivo='total';
+let volGoose=0, volMalz=0;
+
+// ── DOI dinâmico ──────────────────────────────────────────────
+// Para cabo: a transferência só chega em W3 (lead 25d)
+// Portanto W0, W1, W2 usam o DOI sem transferência (doi_0hl)
+// e W3 usa o DOI interpolado com o volume total
+function calcDOI_goose(vol, modal) {
+  if (modal === 'cabo') {
+    // Cabo: volume chega só em W3 — W0-W2 sem reforço = doi_0hl
+    const d0 = B.goose_doi_0hl;
+    const d_w3 = Math.max(0, Math.round((d0[3] + B.goose_slope[3] * vol)*10)/10);
+    return [d0[0], d0[1], d0[2], d_w3];
+  } else {
+    // Rodo: 50% chega W0, 50% chega W2 → afeta W0,W1,W2,W3
+    return B.goose_doi_0hl.map((d0,i) =>
+      Math.max(0, Math.round((d0 + B.goose_slope[i]*vol)*10)/10));
+  }
+}
+
+function calcDOI_malz(vol, modal) {
+  if (modal === 'cabo') {
+    // Cabo: só chega W3
+    const d0 = B.malz_doi_0hl;
+    const d_w3 = Math.max(0, Math.round((d0[3] + B.malz_slope[3]*vol)*10)/10);
+    return [d0[0], d0[1], d0[2], d_w3];
+  } else {
+    return B.malz_doi_0hl.map((d0,i) =>
+      Math.max(0, Math.round((d0 + B.malz_slope[i]*vol)*10)/10));
+  }
+}
+
+function getDOI() {
+  const goose = calcDOI_goose(volGoose, modalAtivo);
+  const malz  = cenAtivo==='base'
+    ? calcDOI_malz(0, modalAtivo)   // Cenário Divulgado: sem transf Malzbier
+    : calcDOI_malz(volMalz, modalAtivo);
+  return { goose, malz, color: B.doi_color, pat: B.doi_pat };
+}
+
+// ── distribuição transf por semana ────────────────────────────
+function getTransfDist(vol, modal) {
+  if (modal==='cabo') {
+    // Cabo: tudo chega em W3
+    return [0, 0, 0, vol];
+  } else {
+    // Rodo: 50% W0, 50% W2, avaria 5%
+    const v = vol * 0.95;
+    return [v*0.5, 0, v*0.5, 0];
+  }
+}
+
+// ── custos ────────────────────────────────────────────────────
+function getCustos(modal) {
+  const m = modal==='rodo' ? 1.6 : 1.0;
+  return { gooseBA: B.cabo_goose_ba*m, goosePB: B.cabo_goose_pb*m,
+           malzBA:  B.cabo_malz_ba*m,  malzPB:  B.cabo_malz_pb*m };
+}
+function getMaco(modal) {
+  const c = getCustos(modal);
+  const fg = c.gooseBA*B.prop_ba + c.goosePB*(1-B.prop_ba);
+  const fm = c.malzBA*B.prop_ba  + c.malzPB*(1-B.prop_ba);
+  return { gooseLocal:B.maco_goose, gooseFrete:B.maco_goose-fg,
+           malzLocal:B.maco_malz,   malzFrete:B.maco_malz-fm,  colorLocal:B.maco_color };
+}
+function getCustoTotal() {
+  const c = getCustos(modalAtivo);
+  const gBA=volGoose*B.prop_ba, gPB=volGoose*(1-B.prop_ba);
+  const mBA=volMalz*B.prop_ba,  mPB=volMalz*(1-B.prop_ba);
+  return gBA*c.gooseBA + gPB*c.goosePB + mBA*c.malzBA + mPB*c.malzPB;
+}
+
+// ── demanda GEO ───────────────────────────────────────────────
+function getDemGeo(sku) {
+  const mk = cenAtivo==='base' ? 'dem_malz_div' : 'dem_malz_sol';
+  if (sku==='malz')  return B[mk];
+  if (sku==='goose') return B.dem_goose;
+  if (sku==='color') return B.dem_color;
+  if (sku==='pat')   return B.dem_pat;
+  const geos=Object.keys(B.dem_goose);
+  return geos.reduce((acc,g)=>{
+    acc[g]=B.dem_goose[g].map((v,i)=>v+B[mk][g][i]+B.dem_color[g][i]+B.dem_pat[g][i]);
+    return acc;
+  },{});
+}
+
+// ── charts ────────────────────────────────────────────────────
+let CH={};
+function initCharts() {
+  const doi=getDOI(), c=getCustos(modalAtivo), m=getMaco(modalAtivo);
+
+  CH.doi=new Chart('cDOI',{type:'line',data:{labels:sems,datasets:[
+    {label:'Goose Island',data:doi.goose,borderColor:A1,backgroundColor:A1+'18',fill:true,tension:0,pointRadius:6,pointBackgroundColor:A1},
+    {label:'Malzbier',    data:doi.malz, borderColor:A3,fill:false,tension:0,pointRadius:6,pointBackgroundColor:A3},
+    {label:'Colorado',    data:doi.color,borderColor:A5,fill:false,tension:0,pointRadius:5,pointBackgroundColor:A5},
+    {label:'Patagônia',   data:doi.pat,  borderColor:A6,borderDash:[5,3],fill:false,tension:0,pointRadius:5,pointBackgroundColor:A6},
+    {label:'Mín 12d',     data:[12,12,12,12],borderColor:REF,borderDash:[6,4],pointRadius:0,borderWidth:1.5,tension:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:GR()},y:{grid:GR(),min:0,max:30,ticks:{callback:v=>v+'d'}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10}},tooltip:TT},animation:{duration:200}}});
+
+  CH.frete=new Chart('cFrete',{type:'bar',data:{
+    labels:['Goose BA','Goose PB','Malz BA','Malz PB'],
+    datasets:[{label:'R$/HL',data:[c.gooseBA,c.goosePB,c.malzBA,c.malzPB],backgroundColor:[A1,A2,A4,A5],borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{x:{grid:GR()},y:{grid:GR(),min:0,max:180,ticks:{callback:v=>'R$'+v}}},
+      plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>'R$'+c.parsed.y.toFixed(1)+'/HL'}}},animation:{duration:200}}});
+
+  CH.maco=new Chart('cMaco',{type:'bar',data:{
+    labels:['Goose\nLocal','Goose\nFrete','Malz\nLocal','Malz\nFrete','Color.\nLocal'],
+    datasets:[{label:'R$/HL',data:[m.gooseLocal,m.gooseFrete,m.malzLocal,m.malzFrete,m.colorLocal],backgroundColor:[A1,A3,A2,A4,A5],borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{x:{grid:GR(),ticks:{font:{size:10}}},y:{grid:GR(),min:0,max:420,ticks:{callback:v=>'R$'+v}}},
+      plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>'R$'+c.parsed.y.toFixed(0)+'/HL'}}},animation:{duration:200}}});
+
+  CH.vol=new Chart('cVol',{type:'bar',data:{labels:sems,datasets:[
+    {label:'Goose Island',data:[0,0,0,0],backgroundColor:A1,borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:GR()},y:{grid:GR(),ticks:{callback:v=>fmt(v)+' HL'}}},
+    plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>fmt(c.parsed.y)+' HL'}}},animation:{duration:200}}});
+
+  // PCP — estáticos com dados corretos da planilha
+  new Chart('cNS',{type:'bar',data:{labels:sems,datasets:[
+    {label:'Goose Island',data:B.pcp_ns_goose, backgroundColor:A1,borderRadius:3,stack:'s'},
+    {label:'Malzbier',    data:B.pcp_ns_malz,  backgroundColor:A3,borderRadius:3,stack:'s'},
+    {label:'Colorado',    data:B.pcp_ns_color, backgroundColor:A5,borderRadius:3,stack:'s'},
+    {label:'Outros LN',   data:B.pcp_ns_outros,backgroundColor:A7,borderRadius:3,stack:'s'},
+    {label:'Cap 27.000',  data:[27000,27000,27000,27000],type:'line',borderColor:REF,borderDash:[4,3],borderWidth:1.5,pointRadius:0,tension:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{stacked:true,grid:GR()},y:{stacked:true,grid:GR(),max:32000,ticks:{callback:v=>fmt(v)}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:10}}},tooltip:TT}}});
+
+  new Chart('cOcup',{type:'bar',data:{labels:sems,datasets:[
+    {label:'AQ541 (CE)',data:B.ocup_aq,backgroundColor:A3,borderRadius:4},
+    {label:'NS541 (PE)',data:B.ocup_ns,backgroundColor:A6,borderRadius:4},
+    {label:'100%',      data:[100,100,100,100],type:'line',borderColor:REF,borderDash:[5,3],borderWidth:2,pointRadius:0,tension:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:GR()},y:{grid:GR(),min:0,max:115,ticks:{callback:v=>v.toFixed(0)+'%'}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10}},tooltip:{...TT,callbacks:{label:c=>c.parsed.y.toFixed(1)+'%'}}}}});
+
+  new Chart('cAQ',{type:'bar',data:{labels:sems,datasets:[
+    {label:'Patagônia', data:B.pcp_aq_pat,  backgroundColor:A3,borderRadius:3,stack:'s'},
+    {label:'Malzbier',  data:B.pcp_aq_malz, backgroundColor:A5,borderRadius:3,stack:'s'},
+    {label:'Colorado',  data:B.pcp_aq_color,backgroundColor:A7,borderRadius:3,stack:'s'},
+    {label:'Cap 12.600',data:[12600,12600,12600,12600],type:'line',borderColor:REF,borderDash:[4,3],borderWidth:1.5,pointRadius:0,tension:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{stacked:true,grid:GR()},y:{stacked:true,grid:GR(),max:15000,ticks:{callback:v=>fmt(v)}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:10}}},tooltip:TT}}});
+
+  initDemChart();
+  updateUI();
+}
+
+function initDemChart() {
+  const geo=getDemGeo(skuAtivo), geos=Object.keys(geo), cores=[A1,A3,A5,A7];
+  if(CH.dem) CH.dem.destroy();
+  CH.dem=new Chart('cDem',{type:'bar',data:{labels:sems,datasets:
+    geos.map((g,i)=>({label:g,data:geo[g],backgroundColor:cores[i],borderRadius:3}))
+  },options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:GR()},y:{grid:GR(),ticks:{callback:v=>fmt(v)+' HL'}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:9}},tooltip:{...TT,callbacks:{label:c=>fmt(c.parsed.y)+' HL'}}}}});
+}
+
+// ── updateUI ──────────────────────────────────────────────────
+function renderDOI(doi) {
+  // Atualiza gráfico
+  CH.doi.data.datasets[0].data = doi.goose;
+  CH.doi.data.datasets[1].data = doi.malz;
+  CH.doi.data.datasets[2].data = doi.color;
+  CH.doi.data.datasets[3].data = doi.pat;
+  CH.doi.update();
+
+  // Atualiza tabela
+  document.getElementById('tDOI').innerHTML=[
+    {n:'Goose Island', d:doi.goose},
+    {n:'Malzbier',     d:doi.malz},
+    {n:'Colorado',     d:doi.color},
+    {n:'Patagônia',    d:doi.pat, sub:'sem rota'},
+  ].map(s=>{
+    const nota=s.sub?` <span style="font-size:9px;color:var(--g2)">(${s.sub})</span>`:'';
+    return `<tr><td class="hl">${s.n}${nota}</td>${s.d.map(v=>{
+      const cl=v<=0?'d-crit':v<B.doi_min?'d-crit':v<B.doi_min+2?'d-warn':'d-ok';
+      return `<td class="num ${cl}">${v.toFixed(1)}d</td>`;
+    }).join('')}</tr>`;
+  }).join('');
+}
+
+function updateUI() {
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  const cls=(id,v)=>{const e=document.getElementById(id);if(e)e.className=v;};
+  const doi=getDOI(), m=getMaco(modalAtivo), c=getCustos(modalAtivo);
+  const custo=getCustoTotal(), td=getTransfDist(volGoose, modalAtivo);
+
+  // KPIs
+  set('kvGoose', volGoose===0?'0 HL':fmt(volGoose)+' HL');
+  set('ksGoose', volGoose===0?'sem transferência':modalAtivo==='cabo'?'cabo · chega W3':'rodo · chega W0/W2');
+  set('kvMalz',  volMalz===0?'0 HL':fmt(volMalz)+' HL');
+  set('ksMalz',  volMalz===0?'sem transferência':modalAtivo==='cabo'?'cabo · chega W3':'rodo · chega W0/W2');
+  set('kvCusto', custo===0?'R$ 0':fmtM(custo));
+  set('ksCusto', custo===0?'sem transferência':modalAtivo==='cabo'?'cabotagem':'rodoviário +60%');
+  const macoVal = volGoose>0 ? Math.round(m.gooseFrete) : B.maco_goose;
+  set('kvMaco',  'R$'+macoVal+'/HL');
+  set('ksMaco',  volGoose===0?'produção local':m.gooseFrete>250?'margem saudável':m.gooseFrete>150?'aceitável':'comprimida');
+
+  // Ruptura
+  const ruptura=[];
+  const skuMap={goose:'Goose Island',malz:'Malzbier',color:'Colorado',pat:'Patagônia'};
+  ['goose','malz','color','pat'].forEach(k=>{
+    doi[k].forEach((d,i)=>{if(d>0&&d<B.doi_min)ruptura.push({sku:skuMap[k],sem:sems[i],doi:d});});
+  });
+  const ruptMain=ruptura.filter(x=>x.sku!=='Patagônia');
+  set('kvRuptura', ruptMain.length===0?'Nenhum':ruptMain.length+' sem.');
+  set('ksRuptura', ruptMain.length===0?'todos ≥ 12d':ruptMain.map(x=>x.sku.split(' ')[0]+' '+x.sem.slice(0,2)+' ('+x.doi.toFixed(1)+'d)').join(' · '));
+  cls('kRuptura','kpi '+(ruptMain.length>0?'k-alerta':'k-ok'));
+  cls('kvRuptura','kv '+(ruptMain.length>0?'k-alerta':'k-ok'));
+
+  // DOI — gráfico + tabela juntos
+  renderDOI(doi);
+
+  // Alertas
+  let al='';
+  if(modalAtivo==='cabo' && (volGoose>0||volMalz>0))
+    al+='<div class="al crit"><span class="al-i">!</span> Cabotagem: lead 25d — transferência só chega em W3. DOI W0–W2 sem reforço.</div>';
+  if(ruptMain.length===0 && modalAtivo==='rodo')
+    al+='<div class="al ok"><span class="al-i">✓</span> Goose e Malzbier com DOI ≥ 12d em todas as semanas</div>';
+  ruptMain.forEach(x=>{al+=`<div class="al crit"><span class="al-i">!</span> ${x.sku} ${x.sem}: ${x.doi.toFixed(1)}d — abaixo do mínimo de 12d</div>`;});
+  const patR=ruptura.filter(x=>x.sku==='Patagônia');
+  if(patR.length>0)
+    al+=`<div class="al warn"><span class="al-i">▲</span> Patagônia sem rota SE→NENO — ${patR.map(x=>x.sem.slice(0,2)+' '+x.doi.toFixed(1)+'d').join(', ')}</div>`;
+  if(modalAtivo==='rodo' && (volGoose>0||volMalz>0))
+    al+='<div class="al ok"><span class="al-i">ℹ</span> Rodoviário: lead 6d → chega W0 e W2. Custo +60%. Avaria +5%.</div>';
+  document.getElementById('alsBox').innerHTML=al;
+
+  // Badges
+  set('bdgModal',  modalAtivo==='cabo'?'CABO · lead 25d':'RODO · lead 6d');
+  set('bdgCen',    cenAtivo==='base'?'Cenário Divulgado':'Solução');
+  set('bdgFrete',  modalAtivo==='cabo'?'cabotagem':'rodoviário');
+  set('bdgVolM',   volGoose===0?'—':modalAtivo==='cabo'?'cabo: chega W3':'rodo: W0/W2');
+  set('bdgDemCen', cenAtivo==='base'?'Cenário Divulgado':'Solução');
+
+  // Custo unitário + MACO
+  CH.frete.data.datasets[0].data=[c.gooseBA,c.goosePB,c.malzBA,c.malzPB]; CH.frete.update();
+  CH.maco.data.datasets[0].data=[m.gooseLocal,m.gooseFrete,m.malzLocal,m.malzFrete,m.colorLocal]; CH.maco.update();
+  CH.vol.data.datasets[0].data=td; CH.vol.update();
+}
+
+// ── event listeners sliders ───────────────────────────────────
+document.getElementById('sGoose').addEventListener('input',e=>{
+  volGoose=+e.target.value;
+  document.getElementById('vGoose').textContent=fmt(volGoose)+' HL';
+  document.getElementById('csGoose').textContent=volGoose===0?'':modalAtivo==='cabo'?'cabo':'rodo';
+  clearCen(); updateUI();
+});
+document.getElementById('sMalz').addEventListener('input',e=>{
+  volMalz=+e.target.value;
+  document.getElementById('vMalz').textContent=fmt(volMalz)+' HL';
+  document.getElementById('csMalz').textContent=volMalz===0?'':modalAtivo==='cabo'?'cabo':'rodo';
+  clearCen(); updateUI();
+});
+
+// ── modal ─────────────────────────────────────────────────────
+function setModal(m){
+  modalAtivo=m;
+  document.getElementById('modalInfo').innerHTML=m==='cabo'
+    ?'<b>Cabotagem:</b> lead 25d &rarr; chega s&oacute; em W3<br>W0&ndash;W2: sem refor&ccedil;o de estoque'
+    :'<b>Rodovi&aacute;rio:</b> lead 6d &rarr; chega W0 e W2<br>Custo +60% &middot; avaria +5%';
+  ['Cabo','Rodo'].forEach(x=>document.getElementById('btn'+x).classList.toggle('on',x.toLowerCase()===m));
+  clearCen(); updateUI();
+}
+
+// ── cenários ──────────────────────────────────────────────────
+const CENS={
+  base:{vol_g:0,     vol_m:0,     modal:'cabo'},
+  sol: {vol_g:15821, vol_m:15897, modal:'rodo'},
+};
+function loadCen(c){
+  cenAtivo=c;
+  const s=CENS[c];
+  volGoose=s.vol_g; volMalz=s.vol_m; modalAtivo=s.modal;
+  document.getElementById('sGoose').value=s.vol_g;
+  document.getElementById('sMalz').value=s.vol_m;
+  document.getElementById('vGoose').textContent=fmt(s.vol_g)+' HL';
+  document.getElementById('vMalz').textContent=s.vol_m===0?'0 HL':fmt(s.vol_m)+' HL';
+  document.getElementById('csGoose').textContent=s.vol_g===0?'':s.modal==='cabo'?'cabo':'rodo';
+  document.getElementById('csMalz').textContent=s.vol_m===0?'':s.modal==='cabo'?'cabo':'rodo';
+  document.getElementById('modalInfo').innerHTML=s.modal==='cabo'
+    ?'<b>Cabotagem:</b> lead 25d &rarr; chega s&oacute; em W3<br>W0&ndash;W2: sem refor&ccedil;o de estoque'
+    :'<b>Rodovi&aacute;rio:</b> lead 6d &rarr; chega W0 e W2<br>Custo +60% &middot; avaria +5%';
+  ['Cabo','Rodo'].forEach(x=>document.getElementById('btn'+x).classList.toggle('on',x.toLowerCase()===s.modal));
+  ['cBase','cSol'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById(c==='base'?'cBase':'cSol').classList.add('on');
+  updateUI(); initDemChart();
+}
+function clearCen(){
+  ['cBase','cSol'].forEach(id=>document.getElementById(id).classList.remove('on'));
+}
+
+// ── tabs GEO ──────────────────────────────────────────────────
+document.getElementById('skuTabs').addEventListener('click',e=>{
+  const btn=e.target.closest('.stab'); if(!btn) return;
+  skuAtivo=btn.dataset.sku;
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const lb={total:'Todas as LNs',malz:'Malzbier',goose:'Goose Island',color:'Colorado',pat:'Patagônia'};
+  document.getElementById('bdgDem').textContent=lb[skuAtivo];
+  initDemChart();
+});
+
+initCharts();
+
+</script>
+</body>
+</html>
