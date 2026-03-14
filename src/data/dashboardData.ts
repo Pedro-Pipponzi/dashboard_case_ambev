@@ -3,7 +3,7 @@
 // DOI do Goose Island em NENO se 0 HL rodo extra fosse transferido (ponto de âncora)
 export const GOOSE_DOI_0HL = [13.3, 16.9, 15.1, 22.7]
 // Slope: variação do DOI por HL de transferência rodo (W0-W3)
-export const GOOSE_SLOPE   = [-8.5e-5, -0.000108, -0.000198, -0.000211]
+export const GOOSE_SLOPE   = [8.5e-5, 0.000108, 0.000198, 0.000211]
 
 // Solução para Malzbier: volume rodo e DOI resultante
 export const MALZ_ANC_VOL = 15897  // HL via rodo

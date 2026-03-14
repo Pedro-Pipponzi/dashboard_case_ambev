@@ -287,8 +287,8 @@ export default function App() {
             <div className="flex gap-2 flex-wrap">
               {([
                 { id: 'div', label: 'Cenário Divulgado',  sub: 'DOI oficial · WSNP Fev/26' },
-                { id: 'nova', label: 'Nova Demanda',       sub: 'Demanda +30% · sem rodo extra' },
-                { id: 'sol', label: 'Solução',             sub: `Goose ${fmt(15030)} + Malz ${fmt(MALZ_ANC_VOL)} HL · rodo` },
+                { id: 'nova', label: 'Nova Demanda',       sub: 'Demanda +30%' },
+                { id: 'sol', label: 'Solução',             sub: `Goose ${fmt(15821)} + Malz ${fmt(MALZ_ANC_VOL)} HL · rodo` },
               ] as const).map(b => (
                 <button key={b.id} onClick={() => loadCen(b.id)}
                   className="rounded-lg px-4 py-2 text-[11px] font-bold min-w-[148px] text-center transition-all border-[1.5px] cursor-pointer"
