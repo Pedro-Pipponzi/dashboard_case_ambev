@@ -140,6 +140,8 @@ function parseCustos(ws: XLSX.WorkSheet): Pick<ExcelData,
     if (sku.includes('MALZBIER') && val === 285) maco_malz = val
   }
 
+  console.log('custos lidos:', { cabo_goose_ba, cabo_goose_pb, cabo_malz_ba, cabo_malz_pb })
+  
   return { cabo_goose_ba, cabo_goose_pb, cabo_malz_ba, cabo_malz_pb, maco_goose, maco_malz, maco_color }
 }
 
