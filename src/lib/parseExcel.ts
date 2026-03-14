@@ -126,15 +126,15 @@ function parseCustos(ws: XLSX.WorkSheet): Pick<ExcelData,
   let maco_goose = 0, maco_malz = 0, maco_color = 0
 
   for (const row of data) {
-    const sku  = String(row[0]).toUpperCase()
-    const dest = String(row[2]).toUpperCase()
-    const val  = Number(row[3])
+    const sku  = String(row[1]).toUpperCase()
+    const dest = String(row[3]).toUpperCase()
+    const val  = Number(row[4])
     if (!isFinite(val) || val === 0) continue
 
-    if (sku.includes('GOOSE') && dest.includes('CAMACARI')) cabo_goose_ba = val
-    if (sku.includes('GOOSE') && dest.includes('FONTE MATA')) cabo_goose_pb = val
-    if (sku.includes('MALZBIER') && dest.includes('CAMACARI')) cabo_malz_ba = val
-    if (sku.includes('MALZBIER') && dest.includes('FONTE MATA')) cabo_malz_pb = val
+    if (sku.includes('GOOSE') && dest.includes('CAMACARI') && val < 200) cabo_goose_ba = val
+    if (sku.includes('GOOSE') && dest.includes('FONTE MATA') && val < 200) cabo_goose_pb = val
+    if (sku.includes('MALZBIER') && dest.includes('CAMACARI') && val < 200) cabo_malz_ba = val
+    if (sku.includes('MALZBIER') && dest.includes('FONTE MATA') && val < 200) cabo_malz_pb = val
     if (sku.includes('COLORADO') && val === 300) maco_color = val
     if (sku.includes('GOOSE') && val === 350) maco_goose = val
     if (sku.includes('MALZBIER') && val === 285) maco_malz = val
