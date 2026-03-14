@@ -131,17 +131,17 @@ function parseCustos(ws: XLSX.WorkSheet): Pick<ExcelData,
     const val  = Number(row[3])
     if (!isFinite(val) || val === 0) continue
 
-    if (sku.includes('GOOSE') && dest.includes('CAMACARI') && val < 200) cabo_goose_ba = val
-    if (sku.includes('GOOSE') && dest.includes('FONTE MATA') && val < 200) cabo_goose_pb = val
-    if (sku.includes('MALZBIER') && dest.includes('CAMACARI') && val < 200) cabo_malz_ba = val
-    if (sku.includes('MALZBIER') && dest.includes('FONTE MATA') && val < 200) cabo_malz_pb = val
+    if (sku.includes('GOOSE') && dest.includes('CAMACARI') && val < 100) cabo_goose_ba = val
+    if (sku.includes('GOOSE') && dest.includes('FONTE MATA') && val < 100) cabo_goose_pb = val
+    if (sku.includes('MALZBIER') && dest.includes('CAMACARI') && val < 100) cabo_malz_ba = val
+    if (sku.includes('MALZBIER') && dest.includes('FONTE MATA') && val < 100) cabo_malz_pb = val
     if (sku.includes('COLORADO') && val === 300) maco_color = val
     if (sku.includes('GOOSE') && val === 350) maco_goose = val
     if (sku.includes('MALZBIER') && val === 285) maco_malz = val
   }
 
   console.log('custos lidos:', { cabo_goose_ba, cabo_goose_pb, cabo_malz_ba, cabo_malz_pb })
-  
+
   return { cabo_goose_ba, cabo_goose_pb, cabo_malz_ba, cabo_malz_pb, maco_goose, maco_malz, maco_color }
 }
 
