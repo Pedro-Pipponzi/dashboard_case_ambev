@@ -128,7 +128,7 @@ export default function App() {
   function loadCen(c: Cen) {
     setCen(c)
     if (c === 'div') { setVolGoose(0); setVolMalz(0); setModal('cabo') }
-    if (c === 'sol') { setVolGoose(15030); setVolMalz(MALZ_ANC_VOL); setModal('rodo') }
+    if (c === 'sol') { setVolGoose(15821); setVolMalz(MALZ_ANC_VOL); setModal('rodo') }
   }
 
   const doi = useMemo(() => {
@@ -211,12 +211,12 @@ export default function App() {
 
   const freteData = {
     labels: ['Goose BA', 'Goose PB', 'Malz BA', 'Malz PB'],
-    datasets: [{ label: 'R$/HL', data: [custos.gooseBA, custos.goosePB, custos.malzBA, custos.malzPB], backgroundColor: [A1, A2, A4, A5], borderRadius: 5 }],
+    datasets: [{ label: 'R$/HL', data: [131.8, 141.3, 135.4, 152.5], backgroundColor: [A1, A2, A4, A5], borderRadius: 5 }],
   }
 
   const macoData = {
-    labels: ['Goose\nLocal', 'Goose\nFrete', 'Malz\nLocal', 'Malz\nFrete', 'Color.\nLocal'],
-    datasets: [{ label: 'R$/HL', data: [maco.gooseLocal, maco.gooseFrete, maco.malzLocal, maco.malzFrete, maco.colorLocal], backgroundColor: [A1, A3, A2, A4, A5], borderRadius: 5 }],
+    labels: ['Goose\nLocal', 'Goose\nRodo-BA', 'Goose\nRodo-PB', 'Malz\nLocal', 'Malz\nRodo-BA','Malz\nRodo-PB', 'Color.\nLocal'],
+    datasets: [{ label: 'R$/HL', data: [maco.gooseLocal, 218.8, 209.2, maco.malzLocal, 149.0, 133.0, maco.colorLocal], backgroundColor: [A1, A3, A2, A4, A5], borderRadius: 5 }],
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -443,7 +443,7 @@ export default function App() {
                 <Bar data={freteData} options={{ ...baseOpts, plugins: { ...baseOpts.plugins, legend: { display: false } }, scales: { x: { grid: GR }, y: { grid: GR, min: 0, max: 180, ticks: { callback: (v: unknown) => 'R$' + v } } } }} />
               </div>
             </Card>
-            <Card title="MACO líquido" badge="R$/HL">
+            <Card title="MACO" badge="R$/HL">
               <div style={{ position: 'relative', height: 240 }}>
                 <Bar data={macoData} options={{
                   ...baseOpts,
