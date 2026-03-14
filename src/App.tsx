@@ -434,6 +434,25 @@ export default function App() {
           </div>
         </div>
 
+        {/* Demanda GEO */}
+        <div>
+          <SectionTitle>📦 Demanda por GEO</SectionTitle>
+          <div className="flex gap-1.5 mb-2.5 flex-wrap">
+            {(Object.keys(SKU_LABELS) as Sku[]).map(s => (
+              <button key={s} onClick={() => setSku(s)}
+                className="px-3 py-1 rounded-2xl text-[10px] font-bold border-[1.5px] cursor-pointer transition-all"
+                style={{ background: sku === s ? A2 : '#F0F4F8', color: sku === s ? '#fff' : '#6B6B6B', borderColor: sku === s ? A2 : '#D4D4D4' }}>
+                {SKU_LABELS[s]}
+              </button>
+            ))}
+          </div>
+          <Card title="Demanda por GEO (HL)" badge={`${SKU_LABELS[sku]} · ${cen === 'div' ? 'Cenário Divulgado' : cen === 'sol' ? 'Solução' : 'Nova Demanda'}`}>
+            <div style={{ position: 'relative', height: 280 }}>
+              <Bar key={`${sku}-${cen}`} data={demData} options={{ ...baseOpts, scales: { x: { grid: GR }, y: { grid: GR, ticks: { callback: (v: unknown) => fmt(v as number) + ' HL' } } } }} />
+            </div>
+          </Card>
+        </div>
+
         {/* Frete & MACO */}
         <div>
           <SectionTitle>💰 Custo de Frete & MACO Líquido</SectionTitle>
@@ -477,24 +496,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Demanda GEO */}
-        <div>
-          <SectionTitle>📦 Demanda por GEO</SectionTitle>
-          <div className="flex gap-1.5 mb-2.5 flex-wrap">
-            {(Object.keys(SKU_LABELS) as Sku[]).map(s => (
-              <button key={s} onClick={() => setSku(s)}
-                className="px-3 py-1 rounded-2xl text-[10px] font-bold border-[1.5px] cursor-pointer transition-all"
-                style={{ background: sku === s ? A2 : '#F0F4F8', color: sku === s ? '#fff' : '#6B6B6B', borderColor: sku === s ? A2 : '#D4D4D4' }}>
-                {SKU_LABELS[s]}
-              </button>
-            ))}
-          </div>
-          <Card title="Demanda por GEO (HL)" badge={`${SKU_LABELS[sku]} · ${cen === 'div' ? 'Cenário Divulgado' : cen === 'sol' ? 'Solução' : 'Nova Demanda'}`}>
-            <div style={{ position: 'relative', height: 280 }}>
-              <Bar key={`${sku}-${cen}`} data={demData} options={{ ...baseOpts, scales: { x: { grid: GR }, y: { grid: GR, ticks: { callback: (v: unknown) => fmt(v as number) + ' HL' } } } }} />
-            </div>
-          </Card>
-        </div>
 
       </main>
     </div>
