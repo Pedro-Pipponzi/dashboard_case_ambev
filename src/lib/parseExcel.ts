@@ -70,14 +70,21 @@ function extractGeoMap(rows: Row[]): GeoMap {
   const result: GeoMap = {}
   for (const row of rows) {
     const geo = String(row[GEO_COL] ?? '')
-    if (!GEOS_NENO.includes(geo)) continue
-    result[geo] = DEM_COLS.map(c => {
+    const mappedGeo = geo.startsWith('NO') ? 'NO Centro' : geo
+    if (!GEOS_NENO.includes(mappedGeo)) continue
+    const vals = DEM_COLS.map(c => {
       const v = Number(row[c])
       return isFinite(v) ? Math.round(v) : 0
     })
+    if (result[mappedGeo]) {
+      result[mappedGeo] = result[mappedGeo].map((v, i) => v + vals[i])
+    } else {
+      result[mappedGeo] = vals
+    }
   }
   return result
 }
+
 
 function parseCenario(ws: XLSX.WorkSheet): {
   doi_goose: number[]; doi_malz: number[]; doi_color: number[]; doi_pat: number[]
