@@ -126,9 +126,9 @@ function parseCustos(ws: XLSX.WorkSheet): Pick<ExcelData,
   let maco_goose = 0, maco_malz = 0, maco_color = 0
 
   for (const row of data) {
-    const sku  = String(row[1]).toUpperCase()
-    const dest = String(row[3]).toUpperCase()
-    const val  = Number(row[4])
+    const sku  = String(row[0]).toUpperCase()
+    const dest = String(row[2]).toUpperCase()
+    const val  = Number(row[3])
     if (!isFinite(val) || val === 0) continue
 
     if (sku.includes('GOOSE') && dest.includes('CAMACARI') && val < 200) cabo_goose_ba = val

@@ -354,7 +354,7 @@ export default function App() {
             { label: 'Transfer. Goose', value: cen === 'div' ? '—' : fmt(volGoose) + ' HL', sub: cen === 'div' ? 'cenário divulgado' : modal === 'cabo' ? 'cabo · chega W3' : 'rodo · chega W0/W2', alert: false },
             { label: 'Transfer. Malzbier', value: cen === 'div' ? '—' : fmt(volMalz) + ' HL', sub: cen === 'div' ? 'cenário divulgado' : modal === 'cabo' ? 'cabo · chega W3' : 'rodo · chega W0/W2', alert: false },
             { label: 'Custo total frete', value: custoTotal === 0 ? 'R$ 0' : fmtM(custoTotal), sub: custoTotal === 0 ? '—' : modal === 'cabo' ? 'cabotagem' : 'rodoviário +60%', alert: false },
-            { label: 'MACO líq. Goose', value: 'R$' + macoVal + '/HL', sub: volGoose === 0 ? 'produção local' : maco.gooseFrete > 250 ? 'margem saudável' : 'aceitável', alert: false },
+            { label: 'MACO líq. Goose', value: 'R$' + macoVal + '/HL', sub: ''},
             { label: 'SKUs abaixo 12d', value: ruptura.length === 0 ? 'Nenhum' : ruptura.length + ' sem.', sub: ruptura.length === 0 ? 'todos ≥ 12d' : ruptura.slice(0, 3).map(x => x.label.split(' ')[0] + ' ' + x.sem.slice(0, 2) + ' (' + x.doi.toFixed(1) + 'd)').join(' · '), alert: ruptura.length > 0 },
           ].map((kpi, i) => (
             <div key={i} className="rounded-lg p-[11px_13px] border-l-4 transition-all"
